@@ -5,7 +5,7 @@
 
 (in-package :named-hashtables-system)
 
-(defsystem :cl-named-hashtables
+(defsystem :named-hashtables
   :name "NAMED-HASHTABLES"
   :author "Alexander aka 'CosmonauT' Vynnyk <cosmonaut.ok@zoho.com>"
   :version "0.2"
