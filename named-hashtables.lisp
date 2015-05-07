@@ -23,6 +23,7 @@
 
 (in-package :named-hashtables)
 
+
 (defclass named-hashtable ()
   ((name :initarg :name :accessor n-h-name)
    (hash :initarg :body :accessor n-h-hash :initform (make-hash-table))
