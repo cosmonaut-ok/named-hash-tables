@@ -17,34 +17,35 @@
 ;; <http://www.gnu.org/licenses/>.
 
 (defpackage :named-hashtables
-  (:nicknames :n-c)
-  (:use :cl)
-)
+  (:nicknames :nh)
+  (:use :cl))
 
 (in-package :named-hashtables)
 
-
-(defclass named-hashtable ()
-  ((name :initarg :name :accessor n-h-name)
-   (hash :initarg :body :accessor n-h-hash :initform (make-hash-table))
-   (documentation :initarg :documentation :accessor n-h-documentation)))
+(defclass named-hash-table ()
+  ((name :initarg :name :accessor nh-name :initform (gensym "NH"))
+   (table :initarg :table :accessor nh-table :initform (make-hash-table))))
 
 (defun make-named-hash-table (name &key (test #+clisp 'fasthash-eql #-clisp 'eql)
-                                (size 1) (rehash-size 1.5)
-                                (rehash-threshold 0.75) documentation)
+                                   (size 1) (rehash-size 1.5)
+                                   (rehash-threshold 0.75) documentation)
+  (check-type name (or string symbol))
+  (check-type size integer)
+  (check-type rehash-size float)
   (let ((hashtable
          (make-hash-table :test test :size size
                           :rehash-size rehash-size
-                          :rehash-threshold rehash-threshold)))
-    (make-instance 'named-hashtable
-                   :name name
-                   :documentation documentation
-                   :hash hashtable)))
+                          :rehash-threshold rehash-threshold))
+        (nh-instance (make-instance 'named-hash-table)))
+    (setf (nh-name nh-instance) name
+          (nh-table nh-instance) hashtable)
+    nh-instance))
 
-(defmethod get-named-hash (key (hashtable named-hashtable))
+(defmethod get-named-hash (key (hashtable named-hash-table))
   "makes gethash from named hashtable"
-  (gethash key (n-h-hash hashtable)))
+  (gethash key (nh-table hashtable)))
 
+;; TODO: do bottom
 (defmethod map-named-hash (function (hashtable named-hashtable))
   "apply function to named hashtable"
   (maphash function (n-h-hash hashtable)))
