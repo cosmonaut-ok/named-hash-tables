@@ -1,2 +1,2 @@
-# named-hashtables
-Small library to manipulate with named hashtables
+# named-hash-tables
+Small library to manipulate with named hash tables
