@@ -22,9 +22,9 @@
   (:export :named-hash-table
            :make-named-hash-table
            :get-named-hash
-	   :set-named-hash
-	   :rem-named-hash
-	   :get-named-name
+           :set-named-hash
+           :rem-named-hash
+           :get-named-name
            :map-named-hash
            :named-hash-table-size
            :named-hash-table-p
