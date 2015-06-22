@@ -25,6 +25,9 @@
            :set-named-hash
            :rem-named-hash
            :get-named-name
+	   :set-named-name
+	   :get-named-table
+	   :set-named-table
            :map-named-hash
            :named-hash-table-size
            :named-hash-table-p
@@ -82,10 +85,17 @@
   "makes gethash from named hash-table"
   (remhash key (nh-table table)))
 
+(defmethod set-named-name ((table named-hash-table) value)
+  "get name from named hash-table"
+  (setf (nh-name table) value))
+
 (defmethod set-named-hash (key value (table named-hash-table))
-  "makes gethash from named hash-table"
+  "set name from named hash-table"
   (setf (gethash key (nh-table table)) value))
 
+(defmethod set-named-table ((table named-hash-table) value)
+  "set table from named hash-table"
+  (setf (nh-table table) value))
 
 (defmethod map-named-hash (function (table named-hash-table))
   "apply function to named hash-table"
