@@ -97,7 +97,7 @@
   "makes gethash from named hash-table"
   (remhash key (nh-table table)))
 
-(defgeneric set-named-name (table)
+(defgeneric set-named-name (table value)
   )
 
 (defmethod set-named-name ((table named-hash-table) value)
@@ -111,7 +111,7 @@
   "set name from named hash-table"
   (setf (gethash key (nh-table table)) value))
 
-(defgeneric set-named-table (table)
+(defgeneric set-named-table (table value)
   )
 
 (defmethod set-named-table ((table named-hash-table) value)
