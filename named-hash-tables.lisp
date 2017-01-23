@@ -169,7 +169,7 @@
 
 ;; /DONE
 ;; TODO:
-(defgeneric ensure-named-gethash (key table)
+(defgeneric ensure-named-gethash (key table &optional default)
   )
 
 (defmethod ensure-named-gethash (key (table named-hash-table) &optional default)
@@ -179,7 +179,7 @@ already in the table.
 Main code used from alexandria"
   (ensure-gethash key (nh-table table) default))
 
-(defgeneric copy-named-hash-table (table)
+(defgeneric copy-named-hash-table (table new-name &key key test size rehash-size rehash-threshold)
   )
 
 (defmethod copy-named-hash-table ((table named-hash-table) new-name
