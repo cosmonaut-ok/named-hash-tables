@@ -69,37 +69,64 @@
           (nh-table nh-instance) table)
     nh-instance))
 
+(defgeneric get-named-hash (key table)
+  )
+
 (defmethod get-named-hash (key (table named-hash-table))
   "makes gethash from named hash-table"
   (gethash key (nh-table table)))
+
+(defgeneric get-named-name (table)
+  )
 
 (defmethod get-named-name ((table named-hash-table))
   "get name from named hash-table"
   (nh-name table))
 
+(defgeneric get-named-table (table)
+  )
+
 (defmethod get-named-table ((table named-hash-table))
   "get name from named hash-table"
   (nh-table table))
+
+(defgeneric rem-named-hash (key table)
+  )
 
 (defmethod rem-named-hash (key (table named-hash-table))
   "makes gethash from named hash-table"
   (remhash key (nh-table table)))
 
+(defgeneric set-named-name (table)
+  )
+
 (defmethod set-named-name ((table named-hash-table) value)
   "get name from named hash-table"
   (setf (nh-name table) value))
+
+(defgeneric set-named-hash (key value table)
+  )
 
 (defmethod set-named-hash (key value (table named-hash-table))
   "set name from named hash-table"
   (setf (gethash key (nh-table table)) value))
 
+(defgeneric set-named-table (table)
+  )
+
 (defmethod set-named-table ((table named-hash-table) value)
   "set table from named hash-table"
   (setf (nh-table table) value))
 
+(defgeneric map-named-hash (function table)
+  )
+
 (defmethod map-named-hash (function (table named-hash-table))
   "apply function to named hash-table"
   (maphash function (nh-table table)))
+
+(defgeneric named-hash-table-size (table)
+  )
 
 (defmethod named-hash-table-size ((table named-hash-table))
   "get named hash-table size"
@@ -112,17 +139,29 @@
          (hash-table-p (nh-table table)))
     t))
 
+(defgeneric named-hash-table-count (table)
+  )
+
 (defmethod named-hash-table-count ((table named-hash-table))
   "returns elements count in named hash-table"
   (hash-table-count (nh-table table)))
+
+(defgeneric named-hash-table-rehash-size (table)
+  )
 
 (defmethod named-hash-table-rehash-size ((table named-hash-table))
   "returns hash-table-rehash-size for named hash-table"
     (hash-table-rehash-size (nh-table table)))
 
+(defgeneric named-hash-table-rehash-threshold (table)
+  )
+
 (defmethod named-hash-table-rehash-threshold ((table named-hash-table))
   "returns hash-table-rehash-threshold for named hash-table"
   (hash-table-rehash-threshold (nh-table table)))
+
+(defgeneric named-hash-table-test (table)
+  )
 
 (defmethod named-hash-table-test ((table named-hash-table))
   "returns hash-table-test for named hash-table"
@@ -130,12 +169,18 @@
 
 ;; /DONE
 ;; TODO:
+(defgeneric ensure-named-gethash (key table)
+  )
+
 (defmethod ensure-named-gethash (key (table named-hash-table) &optional default)
   "Like GETHASH, but if KEY is not found in the HASH-TABLE saves the DEFAULT
 under key before returning it. Secondary return value is true if key was
 already in the table.
 Main code used from alexandria"
   (ensure-gethash key (nh-table table) default))
+
+(defgeneric copy-named-hash-table (table)
+  )
 
 (defmethod copy-named-hash-table ((table named-hash-table) new-name
                                   &key key test size
@@ -162,32 +207,53 @@ copy is returned by default."
   "Like MAPHASH, but calls FUNCTION with each key in the hash table TABLE."
   (maphash-keys function (nh-table table)))
 
- (defmethod maphash-named-values (function (table named-hash-table))
-   "Like MAPHASH, but calls FUNCTION with each value in the hash table TABLE."
-   (maphash-values function (nh-table table)))
+(defgeneric maphash-named-values (function table)
+  )
+
+(defmethod maphash-named-values (function (table named-hash-table))
+  "Like MAPHASH, but calls FUNCTION with each value in the hash table TABLE."
+  (maphash-values function (nh-table table)))
+
+(defgeneric named-hash-table-keys (table)
+  )
 
 (defmethod named-hash-table-keys ((table named-hash-table))
   "Returns a list containing the keys of hash table TABLE."
   (hash-table-keys table))
 
+(defgeneric named-hash-table-values (table)
+  )
+
 (defmethod named-hash-table-values ((table named-hash-table))
   "Returns a list containing the values of hash table TABLE."
   (hash-table-values table))
+
+(defgeneric named-hash-table-alist (table)
+  )
 
 (defmethod named-hash-table-alist ((table named-hash-table))
   "Returns an association list containing the keys and values of hash table
 TABLE."
   (hash-table-alist (nh-table table)))
 
+(defgeneric named-hash-table-plist (table)
+  )
+
 (defmethod named-hash-table-plist ((table named-hash-table))
   "Returns a property list containing the keys and values of hash table
 TABLE."
   (hash-table-plist (nh-table table)))
 
+(defgeneric named-alist-hash-table (table)
+  )
+
 (defmethod named-alist-hash-table ((table named-hash-table))
   "Returns a hash table containing the keys and values of the association list
 ALIST. Hash table is initialized using the HASH-TABLE-INITARGS."
   (alist-hash-table (nh-table table)))
+
+(defgeneric named-plist-hash-table (table)
+  )
 
 (defmethod named-plist-hash-table ((table named-hash-table))
     "Returns a hash table containing the keys and values of the property list
