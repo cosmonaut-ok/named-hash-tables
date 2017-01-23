@@ -203,6 +203,9 @@ copy is returned by default."
           hash-table-table)
     hash-table-object))
 
+(defgeneric maphash-named-keys (function table)
+  )
+
 (defmethod maphash-named-keys (function (table named-hash-table))
   "Like MAPHASH, but calls FUNCTION with each key in the hash table TABLE."
   (maphash-keys function (nh-table table)))
